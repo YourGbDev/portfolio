@@ -1,0 +1,451 @@
+@import url('https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&family=Doto:wght@100..900&family=Figtree:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Default: Dark-first empirical observed values */
+  --bg-page: #0b0d0e;
+  --bg-surface: #1a1b1c;
+  --bg-surface-hover: #222426;
+  --bg-dock: rgba(26, 27, 28, 0.75);
+  --bg-muted: #27272a;
+  --bg-muted-subtle: rgba(39, 39, 42, 0.45);
+  --bg-overlay: rgba(11, 13, 14, 0.85);
+
+  --text-ink: #fafafa;
+  --text-body: #d4d4d8;
+  --text-muted: #8c8c8c;
+  --text-faint: #71717a;
+  --text-brand: #ffffff;
+
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --border-dashed: rgba(255, 255, 255, 0.12);
+  --border-reticle: rgba(255, 255, 255, 0.9);
+  --border-divider: rgba(255, 255, 255, 0.06);
+
+  --status-active: #ffffff;
+  --status-ping: rgba(255, 255, 255, 0.5);
+  --metric-star: #eab308;
+
+  --shadow-tactile: 
+    0px 32px 64px -16px rgba(0, 0, 0, 0.3),
+    0px 16px 32px -8px rgba(0, 0, 0, 0.3),
+    0px 8px 16px -4px rgba(0, 0, 0, 0.24),
+    0px 4px 8px -2px rgba(0, 0, 0, 0.24),
+    0px -8px 16px -1px rgba(0, 0, 0, 0.16),
+    0px 2px 4px -1px rgba(0, 0, 0, 0.24),
+    0px 0px 0px 1px #000000,
+    inset 0px 0px 0px 1px rgba(255, 255, 255, 0.08),
+    inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2);
+
+  --shadow-nav-dock:
+    0px 4px 6px -1px rgba(0, 0, 0, 0.2),
+    0px 2px 4px -2px rgba(0, 0, 0, 0.15),
+    0px 0px 0px 1px rgba(255, 255, 255, 0.1);
+
+  --calendar-cell-empty: #1a1c1e;
+  --calendar-cell-lvl-1: #383a42;
+  --calendar-cell-lvl-2: #666a77;
+  --calendar-cell-lvl-3: #9ea3b3;
+  --calendar-cell-lvl-4: #f4f5f8;
+}
+
+.light {
+  /* Derived Light Theme Extension */
+  --bg-page: #fafafa;
+  --bg-surface: #f4f4f5;
+  --bg-surface-hover: #e4e4e7;
+  --bg-dock: rgba(255, 255, 255, 0.85);
+  --bg-muted: #e4e4e7;
+  --bg-muted-subtle: rgba(228, 228, 231, 0.6);
+  --bg-overlay: rgba(0, 0, 0, 0.5);
+
+  --text-ink: #09090b;
+  --text-body: #27272a;
+  --text-muted: #71717a;
+  --text-faint: #a1a1aa;
+  --text-brand: #000000;
+
+  --border-hairline: rgba(0, 0, 0, 0.08);
+  --border-dashed: rgba(0, 0, 0, 0.12);
+  --border-reticle: rgba(0, 0, 0, 0.9);
+  --border-divider: rgba(0, 0, 0, 0.06);
+
+  --status-active: #09090b;
+  --status-ping: rgba(0, 0, 0, 0.4);
+  --metric-star: #ca8a04;
+
+  --calendar-cell-empty: #ebedf0;
+  --calendar-cell-lvl-1: #c4c8d0;
+  --calendar-cell-lvl-2: #8f94a3;
+  --calendar-cell-lvl-3: #585c69;
+  --calendar-cell-lvl-4: #18191c;
+
+  --shadow-tactile:
+    0px 2px 4px rgba(0, 0, 0, 0.06),
+    0px 1px 2px rgba(0, 0, 0, 0.04),
+    0px 0px 0px 1px rgba(0, 0, 0, 0.08),
+    inset 0px 1px 0px rgba(255, 255, 255, 0.9);
+
+  --shadow-nav-dock:
+    0px 8px 16px -4px rgba(0, 0, 0, 0.08),
+    0px 2px 4px -2px rgba(0, 0, 0, 0.04),
+    0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    background-color: var(--bg-page);
+    color: var(--text-ink);
+    font-family: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--text-ink);
+    color: var(--bg-page);
+  }
+}
+
+/* 60fps Hardware-Accelerated Circular View Transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none !important;
+  mix-blend-mode: normal !important;
+  height: 100%;
+  overflow: clip;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+/* Custom Scrollbar */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Aspect Ratio Utilities */
+.aspect-video {
+  aspect-ratio: 16 / 9 !important;
+  position: relative !important;
+  width: 100% !important;
+}
+
+/* Tactile Pushable Button Recipe */
+.tactile-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  border-radius: 6px;
+  padding: 4px 11px;
+  background-color: var(--bg-surface);
+  color: var(--text-ink);
+  font-family: 'Figtree', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: var(--shadow-tactile);
+  border: 1px solid var(--border-hairline);
+  transition: background-color 150ms ease, transform 150ms ease, border-color 150ms ease;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+}
+
+.tactile-btn:hover {
+  background-color: var(--bg-surface-hover);
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.light .tactile-btn:hover {
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.tactile-btn:active {
+  transform: translateY(0);
+}
+
+/* Floating Navigation Dock */
+.nav-dock {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  min-width: 320px;
+  max-width: 400px;
+  height: 54px;
+  border-radius: 9999px;
+  background-color: var(--bg-dock);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-hairline);
+  box-shadow: var(--shadow-nav-dock);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 6px 14px;
+  user-select: none;
+  transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+@media (max-width: 640px) {
+  .nav-dock {
+    bottom: 16px;
+    padding: 6px 8px;
+    min-width: 300px;
+    max-width: 95vw;
+  }
+}
+
+/* Bottom Progressive Blur Overlay */
+.bottom-progressive-blur {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  pointer-events: none;
+  z-index: 40;
+  background: linear-gradient(to top, var(--bg-page) 25%, transparent 100%);
+  backdrop-filter: blur(4px);
+  mask-image: linear-gradient(to top, black 30%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 30%, transparent 100%);
+  transition: background 200ms ease;
+}
+
+/* Project CAD Card with Corner Drafting Reticles */
+.cad-project-card {
+  position: relative;
+  border: 1px dashed var(--border-dashed);
+  padding: 10px;
+  background: transparent;
+  border-radius: 4px;
+  transition: border-color 200ms ease, background-color 200ms ease, transform 150ms ease;
+}
+
+.cad-project-card:hover {
+  border-color: var(--border-reticle);
+  background-color: var(--bg-surface-hover);
+}
+
+.cad-project-card:active {
+  transform: scale(0.99);
+}
+
+.cad-reticle {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  pointer-events: none;
+  opacity: 0.35;
+  transition: opacity 200ms ease, transform 200ms ease, border-color 200ms ease;
+}
+
+.cad-project-card:hover .cad-reticle,
+.cad-project-card:focus .cad-reticle,
+.cad-project-card:focus-visible .cad-reticle,
+.cad-project-card:focus-within .cad-reticle {
+  opacity: 1;
+}
+
+.cad-reticle--tl {
+  top: -1px;
+  left: -1px;
+  border-top: 1.5px solid var(--border-reticle);
+  border-left: 1.5px solid var(--border-reticle);
+}
+
+.cad-project-card:hover .cad-reticle--tl,
+.cad-project-card:focus .cad-reticle--tl,
+.cad-project-card:focus-visible .cad-reticle--tl,
+.cad-project-card:focus-within .cad-reticle--tl {
+  transform: translate(-1.5px, -1.5px);
+}
+
+.cad-reticle--tr {
+  top: -1px;
+  right: -1px;
+  border-top: 1.5px solid var(--border-reticle);
+  border-right: 1.5px solid var(--border-reticle);
+}
+
+.cad-project-card:hover .cad-reticle--tr,
+.cad-project-card:focus .cad-reticle--tr,
+.cad-project-card:focus-visible .cad-reticle--tr,
+.cad-project-card:focus-within .cad-reticle--tr {
+  transform: translate(1.5px, -1.5px);
+}
+
+.cad-reticle--br {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1.5px solid var(--border-reticle);
+  border-right: 1.5px solid var(--border-reticle);
+}
+
+.cad-project-card:hover .cad-reticle--br,
+.cad-project-card:focus .cad-reticle--br,
+.cad-project-card:focus-visible .cad-reticle--br,
+.cad-project-card:focus-within .cad-reticle--br {
+  transform: translate(1.5px, 1.5px);
+}
+
+.cad-reticle--bl {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 1.5px solid var(--border-reticle);
+  border-left: 1.5px solid var(--border-reticle);
+}
+
+.cad-project-card:hover .cad-reticle--bl,
+.cad-project-card:focus .cad-reticle--bl,
+.cad-project-card:focus-visible .cad-reticle--bl,
+.cad-project-card:focus-within .cad-reticle--bl {
+  transform: translate(-1.5px, 1.5px);
+}
+
+/* Skill Tag Pill */
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  border-radius: 6px;
+  padding: 3px 9px;
+  background-color: var(--bg-muted-subtle);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-ink);
+  font-family: 'Figtree', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  user-select: none;
+}
+
+.skill-pill:hover {
+  background-color: var(--bg-surface);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-brand);
+}
+
+.light .skill-pill:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Work Hairline Connecting Rule */
+.work-divider-track {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(to right, transparent, var(--border-divider), transparent);
+  margin: 0 12px;
+}
+
+/* Ambient Living Status Indicators (2.5s - 3.5s slow breathing & subtle ring) */
+@keyframes status-breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes status-ring-expand {
+  0% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  70%, 100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes status-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
+.animate-status-breathe {
+  animation: status-breathe 3s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.animate-status-ring {
+  animation: status-ring-expand 3s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.animate-status-ping {
+  animation: status-pulse 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Accessibility & Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-status-breathe,
+  .animate-status-ring,
+  .animate-status-ping,
+  .animate-ping,
+  .animate-pulse {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  img {
+    filter: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ==========================================================================
+   Circular View Transition (Explosion / Expanding Wave Theme Switcher)
+   ========================================================================== */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 99999;
+}
+
