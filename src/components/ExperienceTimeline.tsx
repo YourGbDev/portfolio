@@ -241,7 +241,7 @@ export function ExperienceTimeline() {
 
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2 flex-wrap">
-                            <h3 className="font-sans text-sm font-semibold text-ink group-hover:text-brand transition-colors truncate">
+                            <h3 className="font-sans text-sm font-semibold text-ink group-hover:text-brand transition-colors">
                               {exp.role}
                             </h3>
                             {isCurrent && (
@@ -251,7 +251,7 @@ export function ExperienceTimeline() {
                               </span>
                             )}
                           </div>
-                          <p className="font-sans text-xs text-muted-foreground truncate mt-0.5">
+                          <p className="font-sans text-xs text-muted-foreground break-words mt-0.5">
                             {exp.company}
                           </p>
                         </div>
@@ -260,7 +260,7 @@ export function ExperienceTimeline() {
                       {/* Middle: Real Description (Desktop) */}
                       {exp.description && (
                         <div className="hidden md:block flex-1 max-w-xs xl:max-w-sm pl-2">
-                          <p className="font-sans text-xs text-muted-foreground/90 leading-relaxed line-clamp-2">
+                          <p className="font-sans text-xs text-muted-foreground/90 leading-relaxed">
                             {exp.description}
                           </p>
                         </div>
