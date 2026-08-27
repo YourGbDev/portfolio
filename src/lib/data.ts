@@ -617,7 +617,7 @@ export const experiences: ExperienceItem[] = [
   {
     role: "Full-Stack Developer",
     company: "Independent & Student Projects",
-    year: "2025 – Present",
+    year: "2026 – Present",
     yearNode: "PRESENT",
     isCurrent: true,
     description:
