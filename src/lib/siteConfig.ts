@@ -16,6 +16,7 @@ export const SITE_DEFAULT_DESCRIPTION =
 
 export const SOCIAL_PROFILES = {
   github: "https://github.com/YourGbDev",
+  linkedin: "https://www.linkedin.com/in/gilbert-m-bulado-jr-96b95a431/",
 };
 
 export const AUTHOR_INFO = {
@@ -23,5 +24,5 @@ export const AUTHOR_INFO = {
   jobTitle: "Full-Stack Developer",
   affiliation: "Western Leyte College of Ormoc",
   location: "Ormoc City, Philippines",
-  socials: ["https://github.com/YourGbDev"],
+  socials: ["https://github.com/YourGbDev", "https://www.linkedin.com/in/gilbert-m-bulado-jr-96b95a431/"],
 };

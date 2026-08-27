@@ -3,6 +3,7 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { memberOf } from "@/lib/data";
+import { FaLinkedin } from "react-icons/fa";
 import {
   sectionContainerVariants,
   staggeredGridVariants,
@@ -123,6 +124,18 @@ export function FooterGrid() {
                 GitHub
               </span>
             </a>
+
+            <a
+              href="https://www.linkedin.com/in/gilbert-m-bulado-jr-96b95a431/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center justify-center p-3 rounded-lg bg-surface/40 border border-border-hairline hover:border-border-hairline hover:bg-surface hover:text-ink transition-all group cursor-pointer"
+            >
+              <FaLinkedin className="w-4 h-4 text-muted-foreground group-hover:text-ink mb-1.5" />
+              <span className="font-mono text-[11px] text-muted-foreground group-hover:text-ink">
+                LinkedIn
+              </span>
+            </a>
           </div>
         </motion.div>
 
@@ -186,6 +199,15 @@ export function FooterGrid() {
             >
               <span>@YourGbDev</span>
               <span className="text-muted-foreground/60 text-[11px]">github</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/gilbert-m-bulado-jr-96b95a431/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between py-1.5 px-2 rounded hover:bg-surface/50 text-muted-foreground hover:text-ink transition-colors border-b border-border-hairline/40"
+            >
+              <span>Gilbert Bulado</span>
+              <span className="text-muted-foreground/60 text-[11px]">linkedin</span>
             </a>
           </div>
         </motion.div>

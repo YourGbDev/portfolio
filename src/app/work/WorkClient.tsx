@@ -7,6 +7,7 @@ import {
   FolderGit2,
 } from "lucide-react";
 import { TechIcon } from "@/components/TechIcon";
+import { FaLinkedin } from "react-icons/fa";
 
 export function WorkClient() {
   const capabilities = [
@@ -191,6 +192,16 @@ export function WorkClient() {
               />
             </svg>
             <span>GitHub</span>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/gilbert-m-bulado-jr-96b95a431/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="tactile-btn gap-2 h-9 px-4 rounded-md"
+          >
+            <FaLinkedin className="w-3.5 h-3.5 opacity-70" />
+            <span>LinkedIn</span>
           </a>
 
           <Link

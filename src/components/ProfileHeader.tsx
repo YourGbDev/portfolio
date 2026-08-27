@@ -8,6 +8,7 @@ import { GithubContributions } from "./GithubContributions";
 import { LocalTime } from "./LocalTime";
 import { ProfileInfoBlock } from "./ProfileInfoBlock";
 import { Mail } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa";
 
 export function ProfileHeader() {
   const [animationFrame, setAnimationFrame] = useState(0);
@@ -162,6 +163,15 @@ export function ProfileHeader() {
               @YourGbDev
             </a>
             <span className="text-border-hairline">•</span>
+            <a
+              href="https://www.linkedin.com/in/gilbert-m-bulado-jr-96b95a431/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-xs text-muted-foreground hover:text-ink transition-colors duration-200"
+            >
+              LinkedIn
+            </a>
+            <span className="text-border-hairline">•</span>
             <div className="flex items-center gap-1 text-xs text-muted-foreground font-sans">
               <svg
                 className="w-3.5 h-3.5 text-muted-foreground/70 flex-shrink-0"
@@ -224,6 +234,17 @@ export function ProfileHeader() {
             />
           </svg>
           <span>GitHub</span>
+        </a>
+
+        {/* LinkedIn */}
+        <a
+          href="https://www.linkedin.com/in/gilbert-m-bulado-jr-96b95a431/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="tactile-btn gap-1.5"
+        >
+          <FaLinkedin className="w-3.5 h-3.5 opacity-70" />
+          <span>LinkedIn</span>
         </a>
 
         {/* Send Email */}
