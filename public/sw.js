@@ -1,4 +1,4 @@
-const CACHE_VERSION = "v4";
+const CACHE_VERSION = "v5";
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `dynamic-${CACHE_VERSION}`;
 
@@ -31,16 +31,23 @@ self.addEventListener("install", (event) => {
 
 // Activate Event - Clean up stale caches
 self.addEventListener("activate", (event) => {
+  console.log("[SW] Activated with cache version:", CACHE_VERSION);
   event.waitUntil(
     caches.keys().then((cacheNames) => {
+      console.log("[SW] Found cache keys:", cacheNames);
+      const stale = cacheNames.filter((name) => name !== STATIC_CACHE && name !== DYNAMIC_CACHE);
+      if (stale.length === 0) {
+        console.log("[SW] No stale caches to delete");
+        return Promise.resolve();
+      }
       return Promise.all(
-        cacheNames
-          .filter((name) => name !== STATIC_CACHE && name !== DYNAMIC_CACHE)
-          .map((name) => {
-            console.log("[SW] Deleting stale cache:", name);
-            return caches.delete(name);
-          }),
-      );
+        stale.map((name) => {
+          console.log("[SW] Deleting stale cache:", name);
+          return caches.delete(name);
+        }),
+      ).then((results) => {
+        console.log(`[SW] Cache cleanup complete: ${results.filter(Boolean).length} stale caches deleted`);
+      });
     }),
   );
   // Take control immediately

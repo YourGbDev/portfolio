@@ -44,11 +44,7 @@ export async function POST(req: Request) {
     );
 
     // Default to Gemini 2.5 Flash, with graceful fallback to 1.5 Flash
-    const candidateModels = [
-      "gemini-2.5-flash",
-      "gemini-1.5-flash",
-      "gemini-3.5-flash",
-    ];
+    const candidateModels = ["gemini-2.5-flash", "gemini-1.5-flash"];
     let replyText = "";
     let lastError = "";
 
@@ -84,7 +80,26 @@ export async function POST(req: Request) {
             data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
           if (replyText) break;
         } else {
-          lastError = await response.text();
+          const errorText = await response.text();
+          lastError = errorText;
+
+          let isRateLimited = response.status === 429;
+          try {
+            const errorData = JSON.parse(errorText);
+            isRateLimited =
+              isRateLimited ||
+              errorData?.error?.code === 429 ||
+              errorData?.error?.status === "RESOURCE_EXHAUSTED";
+          } catch {
+            isRateLimited = response.status === 429;
+          }
+
+          if (isRateLimited) {
+            return NextResponse.json(
+              { error: "AI is busy right now. Please try again in a moment." },
+              { status: 429 },
+            );
+          }
         }
       } catch (err: unknown) {
         lastError = err instanceof Error ? err.message : String(err);

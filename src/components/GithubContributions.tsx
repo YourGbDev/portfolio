@@ -43,7 +43,10 @@ export function GithubContributions() {
 
     async function fetchContributions() {
       try {
-        const res = await fetch("/api/github-contributions?username=YourGbDev");
+        const res = await fetch(
+          `/api/github-contributions?username=YourGbDev&_t=${Date.now()}`,
+          { cache: "no-store" },
+        );
         if (!res.ok) throw new Error("Failed to fetch contributions");
         const json = await res.json();
         if (isMounted) {
@@ -97,25 +100,50 @@ export function GithubContributions() {
   // Calculate column count
   const columnCount = data.weeks.length;
 
+  // Position month labels the same way GitHub does:
+  // - The first label always starts at least MIN_FIRST_OFFSET px from the left
+  //   edge so it is never clipped against the container edge.
+  // - If the next month starts fewer than MIN_LABEL_GAP px away (i.e. the
+  //   month column is too narrow for a readable label), skip the earlier label
+  //   and only render the later one — this prevents "Aug"+"Sep" merging into
+  //   "AuSep". Each column is 10px + 3px gap = 13px wide.
+  const MIN_FIRST_OFFSET = 2; // px
+  const MIN_LABEL_GAP = 28; // px (approx one 3-char mono label width)
+  const monthLabels: { name: string; key: string; left: number }[] = [];
+  for (let i = 0; i < data.months.length; i++) {
+    const m = data.months[i];
+    const left = m.weekIndex * 13;
+    const next = data.months[i + 1];
+    const nextLeft = next ? next.weekIndex * 13 : Infinity;
+
+    // FIRST LABEL SPECIAL-CASE: If the first label lands within MIN_LABEL_GAP
+    // of the second label, skip it entirely — don't render it at all.
+    if (i === 0 && next && nextLeft - left < MIN_LABEL_GAP) {
+      continue;
+    }
+
+    // General collision: skip this label if the next one starts too close
+    if (next && nextLeft - left < MIN_LABEL_GAP) {
+      continue;
+    }
+    monthLabels.push({ name: m.name, key: `${m.name}-${i}`, left: Math.max(left, MIN_FIRST_OFFSET) });
+  }
+
   return (
     <div className="w-full mt-5 pt-1 select-none">
       <div className="overflow-x-auto scrollbar-none pb-1 -mx-2 px-2">
         <div className="inline-block min-w-max">
           {/* Month Labels Header */}
-          <div className="relative h-4 mb-1.5 font-mono text-[10px] text-muted-foreground/80">
-            {data.months.map((m, idx) => {
-              // Calculate horizontal offset based on week index (each column is 10px + 3px gap = 13px)
-              const leftPos = m.weekIndex * 13;
-              return (
-                <span
-                  key={`${m.name}-${idx}`}
-                  className="absolute transform -translate-x-0"
-                  style={{ left: `${leftPos}px` }}
-                >
-                  {m.name}
-                </span>
-              );
-            })}
+          <div className="relative h-4 mb-1.5 overflow-visible font-mono text-[10px] text-muted-foreground/80">
+            {monthLabels.map((m) => (
+              <span
+                key={m.key}
+                className="absolute left-0 whitespace-nowrap"
+                style={{ left: `${m.left}px` }}
+              >
+                {m.name}
+              </span>
+            ))}
           </div>
 
           {/* 7-Row Contribution Grid */}

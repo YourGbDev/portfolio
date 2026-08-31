@@ -32,7 +32,7 @@ export interface GitHubContributionsResponse {
   error?: string;
 }
 
-// In-memory cache for 1 hour
+// In-memory cache for 5 minutes to keep contributions fresh while limiting GitHub requests
 let cachedData: {
   username: string;
   total: number;
@@ -42,7 +42,7 @@ let cachedData: {
   updatedAt: string;
 } | null = null;
 let lastFetchTime = 0;
-const CACHE_TTL = 60 * 60 * 1000; // 1 hour
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
 export async function GET(req: Request) {
   try {
@@ -56,7 +56,7 @@ export async function GET(req: Request) {
         { success: true, data: cachedData },
         {
           headers: {
-            "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+            "Cache-Control": "public, s-maxage=300, stale-while-revalidate=3600",
           },
         },
       );
@@ -69,7 +69,6 @@ export async function GET(req: Request) {
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
       },
-      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
@@ -217,7 +216,7 @@ export async function GET(req: Request) {
       { success: true, data: parsedData },
       {
         headers: {
-          "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+          "Cache-Control": "public, s-maxage=300, stale-while-revalidate=3600",
         },
       },
     );

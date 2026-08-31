@@ -189,6 +189,17 @@ function ChatWidgetContent() {
         }),
       });
 
+      if (response.status === 429) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content: "AI is busy right now. Please try again in a moment.",
+          },
+        ]);
+        return;
+      }
+
       if (!response.ok) {
         throw new Error("Failed to get response");
       }
