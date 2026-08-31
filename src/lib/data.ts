@@ -98,6 +98,9 @@ export interface FullProjectItem {
   live?: string;
   github?: string;
   featured?: boolean;
+  infrastructure?: string[];
+  deployment?: string;
+  monitoring?: string;
 }
 
 export const projectStatusConfig: Record<
@@ -553,7 +556,15 @@ export const projects: ProjectItem[] = fullProjects
 // Single Source of Truth: Tech Stack Categories
 export const techSections: TechSection[] = [
   {
-    title: "Frontend",
+    title: "Cloud",
+    items: ["AWS"],
+  },
+  {
+    title: "DevOps",
+    items: ["Linux", "Docker", "Git", "GitHub", "GitHub Actions", "CI/CD", "Vercel"],
+  },
+  {
+    title: "Development",
     items: [
       "HTML5",
       "CSS3",
@@ -564,11 +575,6 @@ export const techSections: TechSection[] = [
       "Tailwind CSS",
       "Flutter",
       "Dart",
-    ],
-  },
-  {
-    title: "Backend",
-    items: [
       "Node.js",
       "Express.js",
       "PHP",
@@ -580,34 +586,16 @@ export const techSections: TechSection[] = [
     ],
   },
   {
-    title: "Databases & Cloud",
-    items: [
-      "MariaDB",
-      "MySQL",
-      "PostgreSQL",
-      "Supabase",
-      "Redis",
-    ],
+    title: "Databases",
+    items: ["PostgreSQL", "MariaDB", "MySQL", "Supabase", "Redis"],
   },
   {
     title: "Animation & Design",
-    items: [
-      "Figma",
-      "GSAP",
-      "Framer Motion",
-    ],
+    items: ["Figma", "GSAP", "Framer Motion"],
   },
   {
-    title: "DevOps & Tools",
-    items: [
-      "Docker",
-      "Git",
-      "GitHub",
-      "GitHub Actions",
-      "VS Code",
-      "Postman",
-      "Vercel",
-    ],
+    title: "Tools",
+    items: ["VS Code", "Postman"],
   },
 ];
 
@@ -615,13 +603,13 @@ export const certifications: CertificationItem[] = [];
 
 export const experiences: ExperienceItem[] = [
   {
-    role: "Full-Stack Developer",
+    role: "Cloud & DevOps Engineer in Progress",
     company: "Independent & Student Projects",
     year: "2026 – Present",
     yearNode: "PRESENT",
     isCurrent: true,
     description:
-      "Building full-stack applications with a focus on practical business workflows, APIs, databases, authentication, and production-oriented engineering.",
+      "Building full-stack applications while actively learning AWS, Linux, Docker, CI/CD, and cloud infrastructure — working toward understanding how software is deployed, secured, automated, and operated end-to-end.",
   },
   {
     role: "Front-End Developer",
@@ -685,12 +673,24 @@ export interface ProfileInfoData {
   }[];
 }
 
+export interface CloudJourneyStage {
+  label: string;
+  items: string[];
+  status: "current" | "next" | "planned";
+  note: string;
+}
+
+export interface SystemStatusItem {
+  service: string;
+  status: "LEARNING" | "ACTIVE" | "NEXT" | "PLANNED" | "BUILDING";
+}
+
 export const profileInfo: ProfileInfoData = {
   currentFocus: {
     title: "Current Focus",
     description:
-      "Building full-stack web and mobile applications — POS systems, ed-tech platforms, and public APIs — while strengthening real-world engineering skills.",
-    terminalLine: "> learn · build · iterate · ship",
+      "Building applications while developing practical Cloud and DevOps skills across AWS, Linux, containers, automation, CI/CD, and cloud architecture.",
+    terminalLine: "> build · deploy · automate · iterate",
   },
   whatIBuild: {
     title: "What I Build",
@@ -705,7 +705,7 @@ export const profileInfo: ProfileInfoData = {
       },
       {
         id: "03",
-        items: ["Dashboards & Portals", "Database & Data APIs"],
+        items: ["Cloud & DevOps Foundations", "Deployment-Ready Systems"],
       },
     ],
   },
@@ -713,15 +713,51 @@ export const profileInfo: ProfileInfoData = {
     title: "How I Work",
     principles: [
       "Clean architecture & modularity",
-      "Thoughtful, accessible interfaces",
+      "Systems-minded, infra-aware engineering",
       "Fast iteration & continuous learning",
     ],
   },
   quickFacts: [
     { label: "OPEN TO", value: "Internships · Junior Roles · Freelance" },
     { label: "WORK SETUP", value: "Remote-friendly · Hybrid" },
-    { label: "PROJECT STYLE", value: "Full-stack web & mobile apps" },
-    { label: "CORE FOCUS", value: "Full-Stack Engineering + Mobile" },
-    { label: "INTERESTS", value: "POS · EdTech · Public Data APIs" },
+    { label: "PROJECT STYLE", value: "Full-stack apps + Cloud & DevOps" },
+    { label: "CORE FOCUS", value: "Cloud & DevOps · Full-Stack Engineering" },
+    { label: "INTERESTS", value: "AWS · Linux · CI/CD · EdTech · APIs" },
   ],
 };
+
+export const cloudJourney: CloudJourneyStage[] = [
+  {
+    label: "Foundation",
+    items: ["AWS", "Linux", "Networking"],
+    status: "current",
+    note: "Hands-on fundamentals — exploring AWS services, the Linux CLI, and how networks connect systems.",
+  },
+  {
+    label: "Infrastructure",
+    items: ["AWS Compute", "IAM", "Storage", "Networking"],
+    status: "current",
+    note: "Learning how cloud resources are provisioned, secured, and connected.",
+  },
+  {
+    label: "Automation",
+    items: ["Docker", "CI/CD", "Infrastructure as Code"],
+    status: "next",
+    note: "Next up — repeatable builds, automated pipelines, and defining infrastructure as code.",
+  },
+  {
+    label: "Advanced",
+    items: ["Kubernetes", "Observability", "DevSecOps"],
+    status: "planned",
+    note: "Future learning goals — planned areas I aim to reach as I go deeper into cloud operations.",
+  },
+];
+
+export const systemStatus: SystemStatusItem[] = [
+  { service: "AWS", status: "LEARNING" },
+  { service: "LINUX", status: "ACTIVE" },
+  { service: "DOCKER", status: "NEXT" },
+  { service: "TERRAFORM", status: "PLANNED" },
+  { service: "CI/CD", status: "BUILDING" },
+  { service: "KUBERNETES", status: "PLANNED" },
+];

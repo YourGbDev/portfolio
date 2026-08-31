@@ -340,7 +340,7 @@ The visitor is currently exploring the technology "${pageContext.selectedTech}" 
 - When the visitor asks "Where did he use this?", "Why did he choose this?", or "Which projects use this?", discuss these specific matching projects.`;
       } else {
         activeFocusInstructions = `ACTIVE PAGE CONTEXT (TECH STACK):
-The visitor is browsing the Tech Stack overview page (/tech-stack). Answer questions about Gilbert's frontend, backend, database, and dev toolchains.`;
+The visitor is browsing the Tech Stack overview page (/tech-stack). Answer questions about Gilbert's cloud, DevOps, development, and database toolchains, noting which areas are currently being learned (AWS, Linux, Docker, CI/CD).`;
       }
     } else if (pageContext.pageType === "work") {
       activeFocusInstructions = `ACTIVE PAGE CONTEXT (WORK & AVAILABILITY):
@@ -366,7 +366,7 @@ GILBERT BULADO - AUTHORITATIVE PROFILE
 - Full Name: Gilbert Bulado (online handle: YourGbDev)
 - Education: BS Information Technology (BSIT) Student at Western Leyte College of Ormoc (2024 - Present).
 - Location: Ormoc City, Philippines.
-- Focus: Full-Stack Engineering, Mobile App Development (Flutter), REST API Design, and Modern Web Applications.
+- Focus: Full-Stack Engineering, Mobile App Development (Flutter), REST API Design, and now Cloud & DevOps — actively learning AWS, Linux, Docker, CI/CD, and cloud infrastructure.
 - GitHub: https://github.com/YourGbDev
 - Currently Building: ${currentBuild.title} - ${currentBuild.description} (Tech: ${currentBuild.technologies?.join(", ") || "Flutter, Supabase, Dart"}).
 

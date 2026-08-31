@@ -16,13 +16,16 @@ import {
 
 // Map section titles to code-syntax category tags
 const categorySyntaxMap: Record<string, string> = {
-  Frontend: "<frontend/>",
-  Backend: "<backend/>",
-  "Databases & Cloud": "<database-cloud/>",
+  Cloud: "<cloud/>",
+  DevOps: "<devops/>",
+  Development: "<development/>",
+  Databases: "<databases/>",
+  "Animation & Design": "<design-animation/>",
+  Tools: "<tools/>",
 };
 
-// Home page shows the core primary stack (Frontend, Backend, Databases & Cloud)
-const featuredCategoryTitles = ["Frontend", "Backend", "Databases & Cloud"];
+// Home page shows the core primary stack (Cloud, DevOps, Development, Databases)
+const featuredCategoryTitles = ["Cloud", "DevOps", "Development", "Databases"];
 
 export function TechStack() {
   const { playHover, playClick } = useUISound();
@@ -44,7 +47,7 @@ export function TechStack() {
       {/* Consistent Section Header */}
       <SectionHeader
         label="TECH-STACK"
-        description="Technologies, frameworks, and development tools I work with."
+        description="Cloud, DevOps, and development technologies I build with — and am currently learning."
         actionHref="/tech-stack"
         actionLabel="all technologies"
         className="mb-5 pb-2 border-b border-border-hairline/40"

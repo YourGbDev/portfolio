@@ -15,12 +15,12 @@ import { ProjectStatusBadge } from "@/components/ProjectStatusBadge";
 import { useUISound } from "@/context/SoundContext";
 
 const categorySyntaxMap: Record<string, string> = {
-  Frontend: "<frontend/>",
-  Backend: "<backend/>",
-  "Databases & Cloud": "<database-cloud/>",
-  "AI & Machine Learning": "<ai-ml/>",
+  Cloud: "<cloud/>",
+  DevOps: "<devops/>",
+  Development: "<development/>",
+  Databases: "<databases/>",
   "Animation & Design": "<design-animation/>",
-  "DevOps & Tools": "<devops-tools/>",
+  Tools: "<tools/>",
 };
 
 export function TechStackClient() {
@@ -98,7 +98,7 @@ export function TechStackClient() {
               Tech Stack
             </h1>
             <p className="font-mono text-xs text-muted-foreground mt-1">
-              {"// Languages, frameworks, databases, and development toolchains"}
+              {"// Cloud, DevOps, and development technologies I use & am learning"}
             </p>
           </div>
           <span className="font-mono text-xs text-muted-foreground bg-muted-subtle px-2.5 py-1 rounded border border-border-hairline">

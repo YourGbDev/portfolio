@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Gilbert Bulado — Full-Stack Developer";
+export const alt = "Gilbert Bulado — Cloud & DevOps Engineer in Progress";
 export const size = {
   width: 1200,
   height: 630,
@@ -77,7 +77,7 @@ export default async function Image() {
               maxWidth: "800px",
             }}
           >
-            IT Student & Full-Stack Developer crafting high-performance, accessible, and clean digital solutions.
+            IT Student & Full-Stack Developer expanding into Cloud & DevOps — AWS, Linux, containers, and CI/CD.
           </p>
         </div>
 
@@ -89,7 +89,7 @@ export default async function Image() {
             gap: "16px",
           }}
         >
-          {["Next.js", "React", "TypeScript", "Tailwind CSS", "PHP", "Flutter"].map(
+          {["Next.js", "React", "TypeScript", "AWS", "Docker", "Linux"].map(
             (tech) => (
               <div
                 key={tech}

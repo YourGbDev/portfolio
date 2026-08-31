@@ -111,7 +111,7 @@ export function CertificationsClient() {
               No certifications published yet.
             </h2>
             <p className="font-sans text-xs text-muted-foreground leading-relaxed">
-              I&apos;ll share verified credentials here as I earn them during my BSIT journey and beyond.
+              AWS and DevOps certifications are on my current learning roadmap — I&apos;ll share verified credentials here as I earn them during my BSIT journey and beyond.
             </p>
           </div>
         </div>

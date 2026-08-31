@@ -15,8 +15,8 @@ export function WorkClient() {
     "Clean user interfaces & dashboards",
     "Mobile apps with Flutter",
     "REST API & backend design",
-    "Interactive web experiences",
-    "Database modeling & PostgreSQL",
+    "Linux & cloud infrastructure (learning)",
+    "Docker & containerization (learning)",
   ];
 
   const coreStack = [
@@ -27,6 +27,9 @@ export function WorkClient() {
     "PHP",
     "Flutter",
     "PostgreSQL",
+    "Docker",
+    "Linux",
+    "AWS",
   ];
 
   return (
@@ -97,13 +100,15 @@ export function WorkClient() {
         </p>
         <p>
           I&apos;m still early in my career, but I&apos;ve spent a lot of time{" "}
-          <span className="text-ink font-medium">building real projects</span>,
-          experimenting with different technologies, and learning how to turn ideas
-          into working applications. I&apos;m especially interested in{" "}
-          <span className="text-ink font-medium">web development</span>,{" "}
-          <span className="text-ink font-medium">mobile apps</span>,{" "}
-          <span className="text-ink font-medium">backend & API work</span>, and{" "}
-          <span className="text-ink font-medium">full-stack projects</span>.
+          <span className="text-ink font-medium">building real projects</span> —
+          point-of-sale systems, ed-tech platforms, monitoring tools, and API
+          concepts. I&apos;m now expanding that foundation into{" "}
+          <span className="text-ink font-medium">Cloud &amp; DevOps</span>, actively
+          learning <span className="text-ink font-medium">AWS</span>,{" "}
+          <span className="text-ink font-medium">Linux</span>,{" "}
+          <span className="text-ink font-medium">Docker</span>, and{" "}
+          <span className="text-ink font-medium">CI/CD</span> alongside{" "}
+          <span className="text-ink font-medium">full-stack development</span>.
         </p>
         <p>
           I&apos;m open to{" "}
@@ -153,9 +158,14 @@ export function WorkClient() {
 
         <p className="font-sans text-xs sm:text-[13px] text-muted-foreground leading-relaxed pt-1">
           I also actively explore{" "}
-          <span className="text-ink font-medium">mobile development with Flutter</span>,{" "}
-          <span className="text-ink font-medium">REST API architecture</span>, and{" "}
-          <span className="text-ink font-medium">improving existing products</span> with modern frontend and backend patterns.
+          <span className="text-ink font-medium">Cloud &amp; DevOps</span> —{" "}
+          <span className="text-ink font-medium">AWS</span>,{" "}
+          <span className="text-ink font-medium">Linux</span>,{" "}
+          <span className="text-ink font-medium">Docker</span>, and{" "}
+          <span className="text-ink font-medium">CI/CD</span> — while keeping{" "}
+          <span className="text-ink font-medium">Flutter</span> and{" "}
+          <span className="text-ink font-medium">REST API architecture</span> in my
+          core development practice.
         </p>
       </section>
 

@@ -3,6 +3,7 @@
 import React from "react";
 import {
   Briefcase,
+  Cloud,
   Layers,
   Server,
   Layout,
@@ -24,6 +25,9 @@ export function ExperienceTimeline() {
   const shouldReduceMotion = useReducedMotion();
 
   const getIcon = (role: string) => {
+    if (role.includes("Cloud")) {
+      return <Cloud className="w-3.5 h-3.5 sm:w-4 sm:h-4" />;
+    }
     if (role.includes("Full-Stack")) {
       return <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4" />;
     }

@@ -6,21 +6,21 @@ import { SITE_URL } from "@/lib/siteConfig";
 export const metadata: Metadata = {
   title: "Tech Stack",
   description:
-    "Explore the comprehensive toolchains, frontend frameworks, backend runtimes, databases, and UI motion libraries used by Gilbert Bulado.",
+    "Explore the cloud, DevOps, development, and database technologies used and currently being learned by Gilbert Bulado.",
   alternates: {
     canonical: `${SITE_URL}/tech-stack`,
   },
   openGraph: {
     title: "Tech Stack | Gilbert Bulado",
     description:
-      "Explore the comprehensive toolchains, frontend frameworks, backend runtimes, databases, and UI motion libraries used by Gilbert Bulado.",
+      "Explore the cloud, DevOps, development, and database technologies used and currently being learned by Gilbert Bulado.",
     url: `${SITE_URL}/tech-stack`,
   },
   twitter: {
     card: "summary_large_image",
     title: "Tech Stack | Gilbert Bulado",
     description:
-      "Explore the frontend, backend, database, and dev tools used by Gilbert Bulado.",
+      "Explore the cloud, DevOps, and development technologies used by Gilbert Bulado.",
   },
 };
 

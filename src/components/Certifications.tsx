@@ -127,7 +127,7 @@ export function Certifications() {
               Certifications coming soon
             </h3>
             <p className="font-sans text-xs text-muted-foreground max-w-sm leading-relaxed">
-              Currently pursuing industry credentials — new certificates will land here as I earn them.
+              AWS and DevOps certifications are on my current learning roadmap — new certificates will land here as I earn them.
             </p>
             <span className="font-mono text-[10px] font-bold tracking-wider px-2 py-0.5 rounded bg-brand/10 text-brand border border-brand/20">
               IN PROGRESS

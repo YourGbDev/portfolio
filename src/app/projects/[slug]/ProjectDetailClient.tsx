@@ -161,6 +161,59 @@ export function ProjectDetailClient({
         </div>
       </section>
 
+      {/* Section: <infrastructure-deployment/> (shown only when implemented/documented) */}
+      {(project.infrastructure?.length ||
+        project.deployment ||
+        project.monitoring) && (
+        <section className="space-y-3 pt-2" aria-label="Infrastructure & Deployment">
+          <span className="font-caps text-xs text-muted-foreground uppercase tracking-wider font-mono font-semibold block">
+            &lt;infrastructure-deployment/&gt;
+          </span>
+          <div className="space-y-2.5">
+            {project.infrastructure && project.infrastructure.length > 0 && (
+              <div className="flex items-start gap-3.5 p-3.5 sm:p-4 rounded-lg bg-surface/30 border border-border-hairline">
+                <span className="font-mono text-xs font-semibold text-brand/80 dark:text-brand/90 flex-shrink-0 mt-0.5 select-none">
+                  INFRA
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {project.infrastructure.map((tech) => (
+                    <span
+                      key={tech}
+                      className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-muted-subtle border border-border-hairline text-muted-foreground text-[11px] font-sans font-medium"
+                    >
+                      <TechIcon name={tech} className="w-3 h-3 flex-shrink-0" />
+                      <span>{tech}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {project.deployment && (
+              <div className="p-3.5 sm:p-4 rounded-lg bg-surface/30 border border-border-hairline space-y-1">
+                <h3 className="font-sans text-xs sm:text-[13px] font-semibold text-ink leading-snug">
+                  Deployment
+                </h3>
+                <p className="font-sans text-xs sm:text-[13px] text-muted-foreground leading-relaxed">
+                  {project.deployment}
+                </p>
+              </div>
+            )}
+
+            {project.monitoring && (
+              <div className="p-3.5 sm:p-4 rounded-lg bg-surface/30 border border-border-hairline space-y-1">
+                <h3 className="font-sans text-xs sm:text-[13px] font-semibold text-ink leading-snug">
+                  Monitoring &amp; Operations
+                </h3>
+                <p className="font-sans text-xs sm:text-[13px] text-muted-foreground leading-relaxed">
+                  {project.monitoring}
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Section: <key-features/> */}
       {project.features && project.features.length > 0 && (
         <section className="space-y-4 pt-2">

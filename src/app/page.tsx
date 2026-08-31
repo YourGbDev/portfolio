@@ -5,6 +5,8 @@ import { CurrentlyBuilding } from "@/components/CurrentlyBuilding";
 import { LatestActivity } from "@/components/LatestActivity";
 import { RecentProjects } from "@/components/RecentProjects";
 import { TechStack } from "@/components/TechStack";
+import { CloudJourney } from "@/components/CloudJourney";
+import { SystemStatus } from "@/components/SystemStatus";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { Certifications } from "@/components/Certifications";
 import { Recommendations } from "@/components/Recommendations";
@@ -41,6 +43,12 @@ export default function Home() {
         knowsAbout: [
           "Web Development",
           "Full-Stack Engineering",
+          "Cloud & DevOps",
+          "AWS",
+          "Linux",
+          "Docker",
+          "CI/CD",
+          "Cloud Infrastructure",
           "TypeScript",
           "React",
           "Next.js",
@@ -78,6 +86,12 @@ export default function Home() {
 
       {/* 4. Tech Stack (<categories/> & Vector Pills) */}
       <TechStack />
+
+      {/* 4.5. Cloud Journey (Learning Progression) */}
+      <CloudJourney />
+
+      {/* 4.75. DevOps / System Status (Learning State Visual) */}
+      <SystemStatus />
 
       {/* 5. Work Experience Timeline (Unboxed) */}
       <ExperienceTimeline />

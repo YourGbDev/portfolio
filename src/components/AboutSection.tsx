@@ -24,11 +24,11 @@ export function AboutSection() {
         className="font-sans text-[15px] text-muted-foreground leading-[26px] space-y-4"
       >
         <p>
-          I&apos;m <span className="text-ink font-medium">Gilbert Bulado</span>, an IT student and full-stack developer who enjoys turning ideas into practical web and mobile applications with clean interfaces, thoughtful user experiences, and reliable functionality.
+          I&apos;m <span className="text-ink font-medium">Gilbert Bulado</span>, an IT student and full-stack developer currently expanding into Cloud &amp; DevOps. I started by building software — point-of-sale systems, scholarship-matching platforms, environmental monitoring tools, and public API concepts — and I&apos;m now learning how those applications are <span className="text-ink font-medium">deployed, secured, automated, monitored, and operated</span>.
         </p>
 
         <p>
-          Most of my work comes from building real projects — from point-of-sale systems and scholarship-matching platforms to environmental monitoring tools and public API concepts. I&apos;m especially interested in <span className="text-ink font-medium">full-stack engineering</span>, <span className="text-ink font-medium">mobile app development</span>, <span className="text-ink font-medium">REST API design</span>, and learning how real software systems are designed, connected, and improved over time.
+          I&apos;m actively learning <span className="text-ink font-medium">AWS</span>, <span className="text-ink font-medium">Linux</span>, <span className="text-ink font-medium">cloud infrastructure</span>, <span className="text-ink font-medium">Docker</span>, <span className="text-ink font-medium">CI/CD</span>, and <span className="text-ink font-medium">Infrastructure as Code</span> — building on my background in <span className="text-ink font-medium">full-stack engineering</span>, <span className="text-ink font-medium">mobile app development</span>, and <span className="text-ink font-medium">REST API design</span>. My long-term goal is to understand software systems end-to-end: from interface to infrastructure.
         </p>
       </motion.div>
     </motion.section>

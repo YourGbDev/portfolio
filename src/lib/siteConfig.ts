@@ -7,12 +7,14 @@
 export const SITE_URL = "https://gilbertbulado.vercel.app";
 
 export const SITE_NAME = "Gilbert Bulado";
-export const SITE_TAGLINE = "IT Student & Full-Stack Developer";
-export const SITE_DEFAULT_TITLE = "Gilbert Bulado — Full-Stack Developer";
+export const SITE_TAGLINE =
+  "Cloud & DevOps Engineer in Progress · Full-Stack Developer · IT Student";
+export const SITE_DEFAULT_TITLE =
+  "Gilbert Bulado — Cloud & DevOps Engineer in Progress";
 export const SITE_TITLE_TEMPLATE = "%s | Gilbert Bulado";
 
 export const SITE_DEFAULT_DESCRIPTION =
-  "Hi, I’m Gilbert Bulado, an IT student and full-stack developer who enjoys turning ideas into practical web and mobile applications with clean interfaces, thoughtful user experiences, and reliable functionality.";
+  "Hi, I’m Gilbert Bulado, an IT student and full-stack developer expanding into Cloud & DevOps. I build practical web and mobile applications with clean interfaces and reliable functionality, while learning AWS, Linux, containers, CI/CD, and cloud infrastructure to understand how systems are deployed, secured, and operated end-to-end.";
 
 export const SOCIAL_PROFILES = {
   github: "https://github.com/YourGbDev",
@@ -21,7 +23,7 @@ export const SOCIAL_PROFILES = {
 
 export const AUTHOR_INFO = {
   name: "Gilbert Bulado",
-  jobTitle: "Full-Stack Developer",
+  jobTitle: "Cloud & DevOps Engineer in Progress · Full-Stack Developer",
   affiliation: "Western Leyte College of Ormoc",
   location: "Ormoc City, Philippines",
   socials: ["https://github.com/YourGbDev", "https://www.linkedin.com/in/gilbert-m-bulado-jr-96b95a431/"],

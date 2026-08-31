@@ -33,7 +33,7 @@ export function RecentProjects() {
       {/* Section Header */}
       <SectionHeader
         label="SELECTED-PROJECTS"
-        description="Selected software engineering, full-stack, and mobile applications."
+        description="Selected software engineering, full-stack, and mobile applications — with infrastructure details added as they're built."
         actionHref="/projects"
         actionLabel="all projects"
         className="mb-5 pb-2 border-b border-border-hairline/40"

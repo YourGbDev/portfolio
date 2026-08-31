@@ -72,7 +72,7 @@ export function ProfileHeader() {
       <div className="flex items-center justify-between gap-3 mb-5 flex-wrap">
         <div className="flex items-center gap-2">
           <span className="font-mono text-xs text-muted-foreground tracking-tight">
-            {"// developer & it student"}
+            {"// cloud & devops engineer in progress · full-stack developer"}
           </span>
         </div>
 
@@ -212,7 +212,7 @@ export function ProfileHeader() {
           </div>
 
           <p className="font-sans text-xs sm:text-[13px] text-muted-foreground mt-1.5 leading-relaxed">
-            BSIT @ Western Leyte College of Ormoc • Full-Stack Developer
+            BSIT @ Western Leyte College of Ormoc • Full-Stack Developer • expanding into Cloud &amp; DevOps
           </p>
         </div>
       </div>

@@ -95,6 +95,7 @@ import {
   SiMistralai,
   SiLangchain,
 } from "react-icons/si";
+import { FaAws } from "react-icons/fa";
 import { RiOpenaiFill } from "react-icons/ri";
 import { VscVscode } from "react-icons/vsc";
 
@@ -254,6 +255,9 @@ const ICON_REGISTRY: Record<string, IconConfig> = {
   googlecloud: { component: SiGooglecloud, color: "#4285F4" },
   gcp: { component: SiGooglecloud, color: "#4285F4" },
   cloudflare: { component: SiCloudflare, color: "#F38020" },
+  aws: { component: FaAws, color: "#FF9900" },
+  amazonaws: { component: FaAws, color: "#FF9900" },
+  amazonwebservices: { component: FaAws, color: "#FF9900" },
   terraform: { component: SiTerraform, color: "#844FBA" },
   nginx: { component: SiNginx, color: "#009639" },
   linux: { component: SiLinux, color: "#FCC624" },
