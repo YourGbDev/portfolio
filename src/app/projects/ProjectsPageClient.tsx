@@ -3,24 +3,17 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowLeft, ExternalLink } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
 import { fullProjects, cloudDevOpsRoadmap } from "@/lib/data";
 import { TechIcon } from "@/components/TechIcon";
 import { ProjectStatusBadge } from "@/components/ProjectStatusBadge";
 import { ProjectMedia } from "@/components/ProjectMedia";
 import { CloudRoadmap } from "@/components/CloudRoadmap";
-import { SectionHeader } from "@/components/SectionHeader";
-import { sectionContainerVariants } from "@/lib/motion";
 import { useUISound } from "@/context/SoundContext";
 
 export function ProjectsPageClient() {
   const { playHover, playClick } = useUISound();
-  const shouldReduceMotion = useReducedMotion();
 
   const cloudProjectSlugs = new Set(cloudDevOpsRoadmap.map((step) => step.slug));
-  const firstCloudIndex = fullProjects.findIndex((project) =>
-    cloudProjectSlugs.has(project.slug)
-  );
 
   return (
     <div className="w-full select-none">
@@ -58,24 +51,13 @@ export function ProjectsPageClient() {
 
       {/* 2-Column Responsive CAD Project Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {fullProjects.map((project, index) => (
-          <React.Fragment key={project.slug}>
-            {index === firstCloudIndex && (
-              <motion.div
-                initial={shouldReduceMotion ? false : "hidden"}
-                whileInView={shouldReduceMotion ? undefined : "visible"}
-                viewport={{ once: true, amount: 0.15 }}
-                variants={shouldReduceMotion ? undefined : sectionContainerVariants}
-                className="sm:col-span-2"
-              >
-                <SectionHeader
-                  label="CLOUD & DEVOPS PROJECTS"
-                  className="mt-6 pb-2 border-b border-border-hairline/40"
-                />
-              </motion.div>
-            )}
-
-            <article className="cad-project-card group relative flex flex-col justify-between">
+        {fullProjects
+          .filter((project) => !cloudProjectSlugs.has(project.slug))
+          .map((project) => (
+            <article
+              key={project.slug}
+              className="cad-project-card group relative flex flex-col justify-between"
+            >
               {/* Full Card Clickable Link to Detail Page */}
               <Link
                 href={`/projects/${project.slug}`}
@@ -178,7 +160,6 @@ export function ProjectsPageClient() {
                 )}
               </div>
             </article>
-          </React.Fragment>
         ))}
       </div>
     </div>
