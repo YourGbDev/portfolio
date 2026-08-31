@@ -34,9 +34,17 @@ A minimalist, high-craft developer portfolio and engineering showcase designed w
 1. **[POS System](/#)** (2026) — Point-of-sale system with a React 19 + TypeScript frontend, a PHP REST API, and MariaDB covering product catalog, cart/checkout, receipts, and sales history.
 2. **Scholaris** (2026, In Progress) — Flutter + Supabase scholarship-matching platform that ranks opportunities against each student's eligibility profile.
 3. **EcoWatch** (2026) — Environmental monitoring web app built with PHP, MySQL, and Tailwind CSS for logging observations and reports.
-4. **OpsDesk** (2026, Upcoming) — Operations management platform planned with Next.js + TypeScript, Java/Spring Boot, PostgreSQL, Docker, and WebSockets.
-5. **PH Local Data API** (2026, Concept) — Public REST API for Philippine local data with Node.js/Express, PostgreSQL, and Redis.
-6. **FreelanceFlow** (2026, Concept) — Freelance management platform concept using Next.js, TypeScript, PostgreSQL, Redis, and Prisma.
+4. **PH Local Data API** (2026, Concept) — Public REST API for Philippine local data with Node.js/Express, PostgreSQL, and Redis.
+
+### ☁️ Cloud/DevOps Roadmap (PLANNED)
+
+Learning-build projects planned as a sequence — Build → Automate → Deploy → Observe → Secure. These are roadmap goals, not completed deployments.
+
+1. **InfraForge** (PLANNED) — Production-style Infrastructure as Code on AWS with Terraform, Docker, and IAM (VPC, ECS/EC2, RDS PostgreSQL, S3, ALB, CloudWatch).
+2. **DeployFlow** (PLANNED) — Automated CI/CD delivery pipeline (Git, GitHub Actions, Docker, ECR/ECS, Terraform, Bash/Python, OIDC).
+3. **CloudMind** (PLANNED) — AI-powered Cloud Log Analyzer & Remediation Suggestion Engine on AWS Bedrock with FastAPI/Node.js, PostgreSQL, S3, and JWT.
+4. **SignalOps** (PLANNED) — Observability, reliability, and automated incident response (CloudWatch, SNS, Lambda, EventBridge, chaos engineering).
+5. **CloudShield** (PLANNED) — Zero-trust AWS security layer (IAM, KMS, Secrets Manager, CloudTrail, Config, GuardDuty, VPC Endpoints).
 
 ---
 

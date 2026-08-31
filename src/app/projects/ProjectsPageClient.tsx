@@ -7,6 +7,7 @@ import { fullProjects } from "@/lib/data";
 import { TechIcon } from "@/components/TechIcon";
 import { ProjectStatusBadge } from "@/components/ProjectStatusBadge";
 import { ProjectMedia } from "@/components/ProjectMedia";
+import { CloudRoadmap } from "@/components/CloudRoadmap";
 import { useUISound } from "@/context/SoundContext";
 
 export function ProjectsPageClient() {
@@ -39,6 +40,11 @@ export function ProjectsPageClient() {
             {fullProjects.length} builds
           </span>
         </div>
+      </div>
+
+      {/* Cloud & DevOps Project Roadmap (Planned Builds) */}
+      <div className="mb-14">
+        <CloudRoadmap />
       </div>
 
       {/* 2-Column Responsive CAD Project Grid */}

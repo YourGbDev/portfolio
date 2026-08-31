@@ -4,6 +4,7 @@ import { AboutSection } from "@/components/AboutSection";
 import { CurrentlyBuilding } from "@/components/CurrentlyBuilding";
 import { LatestActivity } from "@/components/LatestActivity";
 import { RecentProjects } from "@/components/RecentProjects";
+import { CloudRoadmap } from "@/components/CloudRoadmap";
 import { TechStack } from "@/components/TechStack";
 import { CloudJourney } from "@/components/CloudJourney";
 import { SystemStatus } from "@/components/SystemStatus";
@@ -83,6 +84,9 @@ export default function Home() {
 
       {/* 3. Selected Projects (CAD Grid) */}
       <RecentProjects />
+
+      {/* 3.25. Cloud & DevOps Project Roadmap (Planned Builds) */}
+      <CloudRoadmap />
 
       {/* 4. Tech Stack (<categories/> & Vector Pills) */}
       <TechStack />

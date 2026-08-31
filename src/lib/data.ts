@@ -51,7 +51,8 @@ export type ProjectStatus =
   | "upcoming"
   | "concept"
   | "school-project"
-  | "archived";
+  | "archived"
+  | "planned";
 
 export interface TechnicalDecision {
   title: string;
@@ -137,12 +138,128 @@ export const projectStatusConfig: Record<
     dotClass: "bg-indigo-500 dark:bg-indigo-400",
     badgeClass: "text-indigo-500 dark:text-indigo-300 bg-indigo-500/10 border-indigo-500/20",
   },
+  planned: {
+    label: "PLANNED",
+    dotClass: "bg-violet-500 dark:bg-violet-400",
+    badgeClass: "text-violet-500 dark:text-violet-300 bg-violet-500/10 border-violet-500/20",
+  },
   archived: {
     label: "ARCHIVED",
     dotClass: "bg-zinc-500",
     badgeClass: "text-zinc-500 dark:text-zinc-400 bg-zinc-500/10 border-zinc-500/20",
   },
 };
+
+// Retired/Preserved projects — not listed publicly but data preserved
+export const retiredProjects: FullProjectItem[] = [
+  {
+    slug: "opsdesk",
+    title: "OpsDesk",
+    category: "Operations Management Platform",
+    year: "2026",
+    image: "/projects/opsdesk.png",
+    color: "bg-[#1a1410]",
+    role: "Full-Stack Developer",
+    client: "Planned Project",
+    tags: ["Next.js", "TypeScript", "Java", "Spring Boot", "PostgreSQL", "Docker", "WebSockets"],
+    overview:
+      "An operations management platform in the planning stage — a Next.js + TypeScript frontend, a Java/Spring Boot backend, PostgreSQL persistence, WebSockets for live updates, and Docker Compose for development.",
+    fullDescription:
+      "OpsDesk is a planned operations management platform, currently an architecture and product concept rather than an implementation. The intended design pairs a Next.js + TypeScript frontend with a Java/Spring Boot REST API, uses PostgreSQL for relational persistence, and adds WebSocket channels for live status updates. Development environments are defined with Docker Compose so the full stack runs identically on any machine. The stack described here is target architecture for the upcoming build, not completed code.",
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "Java",
+      "Spring Boot",
+      "PostgreSQL",
+      "Docker",
+      "WebSockets",
+    ],
+    features: [
+      "Live operations dashboards updated over WebSockets",
+      "Ticket / task tracking with status transitions",
+      "Role-based access for operators and admins",
+      "PostgreSQL persistence with structured migrations",
+      "Docker Compose development environment",
+      "REST API documented for future clients",
+    ],
+    technicalDecisions: [
+      {
+        title: "Why Java / Spring Boot for the backend?",
+        description:
+          "Spring Boot provides a typed, structured REST layer with first-class WebSocket support, which suits a platform expected to grow in complexity and team size.",
+      },
+      {
+        title: "Why Docker Compose for development?",
+        description:
+          "Containerizing the backend, database, and frontend removes environment drift and makes provisioning a new machine a single command.",
+      },
+    ],
+    learnings: [
+      {
+        title: "Plan the real-time event model before the UI",
+        description:
+          "Deciding which state changes emit WebSocket events up front prevents bolting live updates onto an architecture that was not built for them.",
+      },
+      {
+        title: "Treat migrations as the database contract",
+        description:
+          "Versioned schema migrations keep the PostgreSQL layer reviewable and reversible as the domain model evolves.",
+      },
+    ],
+    status: "upcoming",
+    featured: true,
+  },
+  {
+    slug: "freelanceflow",
+    title: "FreelanceFlow",
+    category: "Freelance Management Platform",
+    year: "2026",
+    image: "/projects/freelanceflow.png",
+    color: "bg-[#1c1023]",
+    role: "Full-Stack Developer",
+    client: "Personal Project",
+    tags: ["Next.js", "TypeScript", "PostgreSQL", "Redis", "Prisma"],
+    overview:
+      "A concept for a freelance admin platform that models clients, projects, invoices, and payments — designed with Next.js, TypeScript, Prisma, and PostgreSQL, with Redis for caching and lightweight background jobs.",
+    fullDescription:
+      "FreelanceFlow is a planned platform for the administrative side of freelance work: tracking clients, projects, invoices, and payments in one place. The design centers on modeling those relationships cleanly — Prisma defines a typed PostgreSQL schema for clients, projects, invoices, and payments, and Redis handles response caching plus lightweight background jobs such as invoice reminders. Concept phase only; not yet implemented.",
+    techStack: ["Next.js", "TypeScript", "PostgreSQL", "Redis", "Prisma"],
+    features: [
+      "Client and contact records with project history",
+      "Project tracking with status and deliverables",
+      "Invoice creation and payment status tracking",
+      "Dashboard summaries for earnings and outstanding invoices",
+      "Redis-backed caching and background reminder jobs",
+    ],
+    technicalDecisions: [
+      {
+        title: "Why Prisma over handwritten SQL?",
+        description:
+          "Prisma provides type-safe queries and versioned migrations, keeping the schema reviewable and the application code free of string-built SQL.",
+      },
+      {
+        title: "Why Redis beyond caching?",
+        description:
+          "Redis doubles as a simple queue for background jobs such as invoice reminders, avoiding a heavier job worker until the platform needs one.",
+      },
+    ],
+    learnings: [
+      {
+        title: "Invoicing is a state machine",
+        description:
+          "Modeling the invoice lifecycle (draft → sent → paid / overdue) as explicit statuses prevents messy ad-hoc update logic.",
+      },
+      {
+        title: "Money needs one canonical representation",
+        description:
+          "Storing amounts as integers with a defined currency avoids rounding surprises across invoices and dashboards.",
+      },
+    ],
+    status: "concept",
+    featured: false,
+  },
+];
 
 // Single Source of Truth: All Featured & Side Projects
 export const fullProjects: FullProjectItem[] = [
@@ -310,64 +427,6 @@ export const fullProjects: FullProjectItem[] = [
     featured: true,
   },
   {
-    slug: "opsdesk",
-    title: "OpsDesk",
-    category: "Operations Management Platform",
-    year: "2026",
-    image: "/projects/opsdesk.png",
-    color: "bg-[#1a1410]",
-    role: "Full-Stack Developer",
-    client: "Planned Project",
-    tags: ["Next.js", "TypeScript", "Java", "Spring Boot", "PostgreSQL", "Docker", "WebSockets"],
-    overview:
-      "An operations management platform in the planning stage — a Next.js + TypeScript frontend, a Java/Spring Boot backend, PostgreSQL persistence, WebSockets for live updates, and Docker Compose for development.",
-    fullDescription:
-      "OpsDesk is a planned operations management platform, currently an architecture and product concept rather than an implementation. The intended design pairs a Next.js + TypeScript frontend with a Java/Spring Boot REST API, uses PostgreSQL for relational persistence, and adds WebSocket channels for live status updates. Development environments are defined with Docker Compose so the full stack runs identically on any machine. The stack described here is target architecture for the upcoming build, not completed code.",
-    techStack: [
-      "Next.js",
-      "TypeScript",
-      "Java",
-      "Spring Boot",
-      "PostgreSQL",
-      "Docker",
-      "WebSockets",
-    ],
-    features: [
-      "Live operations dashboards updated over WebSockets",
-      "Ticket / task tracking with status transitions",
-      "Role-based access for operators and admins",
-      "PostgreSQL persistence with structured migrations",
-      "Docker Compose development environment",
-      "REST API documented for future clients",
-    ],
-    technicalDecisions: [
-      {
-        title: "Why Java / Spring Boot for the backend?",
-        description:
-          "Spring Boot provides a typed, structured REST layer with first-class WebSocket support, which suits a platform expected to grow in complexity and team size.",
-      },
-      {
-        title: "Why Docker Compose for development?",
-        description:
-          "Containerizing the backend, database, and frontend removes environment drift and makes provisioning a new machine a single command.",
-      },
-    ],
-    learnings: [
-      {
-        title: "Plan the real-time event model before the UI",
-        description:
-          "Deciding which state changes emit WebSocket events up front prevents bolting live updates onto an architecture that was not built for them.",
-      },
-      {
-        title: "Treat migrations as the database contract",
-        description:
-          "Versioned schema migrations keep the PostgreSQL layer reviewable and reversible as the domain model evolves.",
-      },
-    ],
-    status: "upcoming",
-    featured: true,
-  },
-  {
     slug: "ph-local-data-api",
     title: "PH Local Data API",
     category: "Public Data API",
@@ -423,53 +482,293 @@ export const fullProjects: FullProjectItem[] = [
     featured: false,
   },
   {
-    slug: "freelanceflow",
-    title: "FreelanceFlow",
-    category: "Freelance Management Platform",
+    slug: "inforforge",
+    title: "InfraForge",
+    category: "Cloud Infrastructure Engineering",
     year: "2026",
-    image: "/projects/freelanceflow.png",
-    color: "bg-[#1c1023]",
-    role: "Full-Stack Developer",
-    client: "Personal Project",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "Redis", "Prisma"],
+    image: "/projects/inforforge.png",
+    color: "bg-[#0f1b2d]",
+    role: "Cloud Infrastructure Engineer",
+    client: "Planned Project",
+    tags: ["AWS", "Terraform", "Docker", "IAM"],
     overview:
-      "A concept for a freelance admin platform that models clients, projects, invoices, and payments — designed with Next.js, TypeScript, Prisma, and PostgreSQL, with Redis for caching and lightweight background jobs.",
+      "Planned — a production-style Infrastructure as Code build on AWS. The goal is to define a multi-AZ network and container stack with Terraform: VPC, ECS/EC2, RDS PostgreSQL, S3, ALB, and CloudWatch, secured with least-privilege IAM. Not yet built.",
     fullDescription:
-      "FreelanceFlow is a planned platform for the administrative side of freelance work: tracking clients, projects, invoices, and payments in one place. The design centers on modeling those relationships cleanly — Prisma defines a typed PostgreSQL schema for clients, projects, invoices, and payments, and Redis handles response caching plus lightweight background jobs such as invoice reminders. Concept phase only; not yet implemented.",
-    techStack: ["Next.js", "TypeScript", "PostgreSQL", "Redis", "Prisma"],
+      "InfraForge is the first planned Cloud/DevOps learning build: a production-style Infrastructure as Code project on AWS. The target architecture defines a private, multi-AZ network — VPC with public and private subnets, an ALB, ECS/EC2 compute, an isolated RDS PostgreSQL database, S3 for object storage, and CloudWatch for logs and metrics — all provisioned and versioned with Terraform and containerized with Docker. IAM policies are designed around least privilege so no resource is reachable or configurable beyond what the architecture needs. The scope is the first step in a roadmap — Build to Automate to Deploy to Observe to Secure — so its network, database, and container patterns can be reused by the later projects. This is a planned roadmap build: no AWS infrastructure, Terraform state, or deployment exists yet.",
+    techStack: [
+      "AWS",
+      "Terraform",
+      "Docker",
+      "IAM",
+      "VPC",
+      "ECS/EC2",
+      "RDS PostgreSQL",
+      "S3",
+      "ALB",
+      "CloudWatch",
+    ],
     features: [
-      "Client and contact records with project history",
-      "Project tracking with status and deliverables",
-      "Invoice creation and payment status tracking",
-      "Dashboard summaries for earnings and outstanding invoices",
-      "Redis-backed caching and background reminder jobs",
+      "Versioned Terraform configuration for the full environment (planned)",
+      "Multi-AZ VPC with public/private subnet isolation (planned)",
+      "ALB routing to ECS/EC2 compute (planned)",
+      "Private RDS PostgreSQL with no public exposure (planned)",
+      "S3 buckets for object storage and state/artifacts (planned)",
+      "Least-privilege IAM roles and policies (planned)",
+      "CloudWatch logging and metrics collection (planned)",
+      "Docker containerization of application components (planned)",
     ],
     technicalDecisions: [
       {
-        title: "Why Prisma over handwritten SQL?",
+        title: "Why Terraform for this project? (planned)",
         description:
-          "Prisma provides type-safe queries and versioned migrations, keeping the schema reviewable and the application code free of string-built SQL.",
+          "Declarative, versioned Infrastructure as Code makes the whole environment reproducible and reviewable as a single artifact — the intended foundation for the later DeployFlow automation.",
       },
       {
-        title: "Why Redis beyond caching?",
+        title: "Why a private, multi-AZ network? (planned)",
         description:
-          "Redis doubles as a simple queue for background jobs such as invoice reminders, avoiding a heavier job worker until the platform needs one.",
+          "Putting the database in a private subnet and routing traffic only through an ALB models how real production systems isolate sensitive data, which is the honest learning goal of this build.",
       },
     ],
-    learnings: [
-      {
-        title: "Invoicing is a state machine",
-        description:
-          "Modeling the invoice lifecycle (draft → sent → paid / overdue) as explicit statuses prevents messy ad-hoc update logic.",
-      },
-      {
-        title: "Money needs one canonical representation",
-        description:
-          "Storing amounts as integers with a defined currency avoids rounding surprises across invoices and dashboards.",
-      },
-    ],
-    status: "concept",
+    status: "planned",
     featured: false,
+  },
+  {
+    slug: "deployflow",
+    title: "DeployFlow",
+    category: "CI/CD & DevOps Engineering",
+    year: "2026",
+    image: "/projects/deployflow.png",
+    color: "bg-[#0a1e22]",
+    role: "DevOps Engineer",
+    client: "Planned Project",
+    tags: ["Git", "GitHub Actions", "Docker", "Terraform"],
+    overview:
+      "Planned — an automated CI/CD delivery pipeline that deploys containerized applications to the InfraForge infrastructure. GitHub Actions, Docker, ECR/ECS, Terraform, Bash/Python, and OIDC-powered cloud access. Not yet built.",
+    fullDescription:
+      "DeployFlow is the second planned Cloud/DevOps learning build: an automated CI/CD delivery pipeline that ships containerized applications to cloud infrastructure. The intended design uses GitHub Actions for CI/CD, builds and pushes images to AWS ECR, and rolls them out to ECS, with Terraform managing the deployment infrastructure and OIDC replacing long-lived cloud credentials with short-lived identity federation. Bash and Python scripts handle build, test, and release steps, with health gates gating promotion and documented rollback strategies if a release misbehaves. As a DevSecOps-minded pipeline, secrets are injected at deploy time and never baked into images. This extends InfraForge by automating delivery of what the infrastructure runs. This is a planned roadmap build: no pipeline, Docker image, or cloud deployment exists yet.",
+    techStack: [
+      "Git",
+      "GitHub Actions",
+      "Docker",
+      "AWS ECR",
+      "AWS ECS",
+      "Terraform",
+      "Bash",
+      "Python",
+      "OIDC",
+    ],
+    features: [
+      "GitHub Actions workflow for build, test, and deploy (planned)",
+      "Container image builds pushed to AWS ECR (planned)",
+      "Deployment to ECS on the InfraForge infrastructure (planned)",
+      "OIDC-based cloud access without long-lived keys (planned)",
+      "Health gates between environment promotions (planned)",
+      "Documented rollback and redeploy strategy (planned)",
+      "Secrets injected at deploy time (planned)",
+    ],
+    technicalDecisions: [
+      {
+        title: "Why OIDC instead of access keys? (planned)",
+        description:
+          "Federating GitHub Actions with AWS through OIDC keeps cloud credentials short-lived and scoped, which is the security-minded approach this pipeline is meant to practice.",
+      },
+      {
+        title: "Why health gates before promotion? (planned)",
+        description:
+          "Requiring the deployed application to pass health checks before promotion is the intended safety mechanism for catching broken releases before they reach the next environment.",
+      },
+    ],
+    status: "planned",
+    featured: false,
+  },
+  {
+    slug: "cloudmind",
+    title: "CloudMind",
+    category: "Cloud Application Engineering + AI",
+    year: "2026",
+    image: "/projects/cloudmind.png",
+    color: "bg-[#14102b]",
+    role: "Cloud Application Engineer",
+    client: "Planned Project",
+    tags: ["AWS Bedrock", "FastAPI", "Node.js", "PostgreSQL"],
+    overview:
+      "Planned — an AI-powered Cloud Log Analyzer and Remediation Suggestion Engine: a cloud-native service architecture built on managed AWS AI and data services, with FastAPI/Node.js backends and a secure JWT API layer. Not yet built.",
+    fullDescription:
+      "CloudMind is the third planned Cloud/DevOps learning build: an AI-powered Cloud Log Analyzer and Remediation Suggestion Engine that reads application logs and suggests remediation steps. The intended architecture is cloud-native: a FastAPI and/or Node.js backend exposing REST APIs, AWS Bedrock as the managed AI service for analysis, PostgreSQL for persistence, and S3 for log/object storage, containerized with Docker and served behind an ALB. Access is secured with JWT authentication and IAM-based service-to-service access so the API layer, AI service, and database only ever talk to each other with scoped permissions. It deliberately reuses the infrastructure from InfraForge and the delivery automation from DeployFlow, making it the first project that exercises all three layers together. This is a planned roadmap build: no AI service, backend, or deployment exists yet.",
+    techStack: [
+      "AWS Bedrock",
+      "FastAPI",
+      "Node.js",
+      "PostgreSQL",
+      "S3",
+      "Docker",
+      "JWT",
+      "ALB",
+      "CI/CD",
+    ],
+    features: [
+      "REST API over FastAPI and/or Node.js (planned)",
+      "AWS Bedrock-powered log analysis (planned)",
+      "Remediation suggestion engine (planned)",
+      "PostgreSQL storage for logs and suggestions (planned)",
+      "S3 for log and object storage (planned)",
+      "JWT-secured API access (planned)",
+      "IAM-based service-to-service access (planned)",
+      "Containerized deployment behind an ALB (planned)",
+    ],
+    technicalDecisions: [
+      {
+        title: "Why managed AI over running models myself? (planned)",
+        description:
+          "Using AWS Bedrock keeps the focus on architecture — API design, IAM-scoped access, and cloud-native deployment — rather than model hosting, which is the intended learning goal.",
+      },
+      {
+        title: "Why a strict API + service boundary? (planned)",
+        description:
+          "Separating the REST layer, AI service, and database behind scoped IAM roles is how the build intends to keep sensitive log data and internal services from being exposed.",
+      },
+    ],
+    status: "planned",
+    featured: false,
+  },
+  {
+    slug: "signalops",
+    title: "SignalOps",
+    category: "Observability / SRE / Cloud Operations",
+    year: "2026",
+    image: "/projects/signalops.png",
+    color: "bg-[#082018]",
+    role: "Cloud Operations Engineer",
+    client: "Planned Project",
+    tags: ["CloudWatch", "SNS", "Lambda", "EventBridge"],
+    overview:
+      "Planned — observability, reliability, and automated incident response for the systems built in the earlier roadmap projects. CloudWatch, SNS, Lambda, EventBridge, and chaos-engineering-based failure testing. Not yet built.",
+    fullDescription:
+      "SignalOps is the fourth planned Cloud/DevOps learning build: an observability and reliability layer that instruments the systems created by the earlier roadmap projects. The intended design centralizes logs, metrics, and alarms through AWS CloudWatch, routes alerts with SNS, and uses EventBridge-driven Lambda functions for automated remediation. It introduces SLI/SLO concepts to define measurable reliability targets, and chaos-engineering practices to deliberately inject failures so incident response can be practiced safely. The result is an operations discipline that answers: is the system healthy, and what happens when it is not? This is a planned roadmap build: no dashboards, alarms, or incident pipelines exist yet.",
+    techStack: [
+      "AWS CloudWatch",
+      "Amazon SNS",
+      "AWS Lambda",
+      "Amazon EventBridge",
+      "Chaos Engineering",
+    ],
+    features: [
+      "Centralized logging and metrics via CloudWatch (planned)",
+      "Alarm-based alerting routed through SNS (planned)",
+      "EventBridge-driven Lambda remediation (planned)",
+      "SLI/SLO definitions for the tracked systems (planned)",
+      "Failure injection with chaos engineering (planned)",
+      "Documented incident response runbooks (planned)",
+    ],
+    technicalDecisions: [
+      {
+        title: "Why CloudWatch + EventBridge + Lambda? (planned)",
+        description:
+          "A fully managed pipeline from metric to alarm to automated remediation is the intended way to learn observability without running monitoring infrastructure itself.",
+      },
+      {
+        title: "Why SLIs/SLOs before dashboards? (planned)",
+        description:
+          "Defining what good looks like (availability, latency targets) first is what makes the alarms meaningful — the intended shift from collecting data to acting on it.",
+      },
+    ],
+    status: "planned",
+    featured: false,
+  },
+  {
+    slug: "cloudshield",
+    title: "CloudShield",
+    category: "Cloud Security Engineering",
+    year: "2026",
+    image: "/projects/cloudshield.png",
+    color: "bg-[#200a10]",
+    role: "Cloud Security Engineer",
+    client: "Planned Project",
+    tags: ["AWS IAM", "KMS", "Secrets Manager", "CloudTrail"],
+    overview:
+      "Planned — a zero-trust AWS security layer governing the whole roadmap stack. Least-privilege IAM, KMS encryption, Secrets Manager, CloudTrail audit, Config, GuardDuty, and VPC Endpoints. Not yet built.",
+    fullDescription:
+      "CloudShield is the final planned Cloud/DevOps learning build: a zero-trust AWS cloud security layer that applies security governance across the infrastructure, deployment, application, and observability layers built in the earlier roadmap projects. The intended scope covers least-privilege IAM across every service, encryption at rest and in transit with KMS, secret storage via Secrets Manager, audit logging with CloudTrail, compliance baselines with Config, threat detection with GuardDuty, and private connectivity through VPC Endpoints so traffic never leaves the AWS network. It is the capstone of the roadmap — Build to Automate to Deploy to Observe to Secure — because it treats security as a cross-cutting governance layer rather than a single tool. This is a planned roadmap build: no security policies, encryption, or audit pipelines exist yet.",
+    techStack: [
+      "AWS IAM",
+      "AWS KMS",
+      "AWS Secrets Manager",
+      "AWS CloudTrail",
+      "AWS Config",
+      "Amazon GuardDuty",
+      "VPC Endpoints",
+    ],
+    features: [
+      "Least-privilege IAM across all roadmap systems (planned)",
+      "KMS encryption for data at rest and in transit (planned)",
+      "Secrets centralized in Secrets Manager (planned)",
+      "CloudTrail audit logging and monitoring (planned)",
+      "AWS Config compliance baselines (planned)",
+      "GuardDuty threat detection (planned)",
+      "VPC Endpoints for private network access (planned)",
+      "Zero-trust network segmentation (planned)",
+    ],
+    technicalDecisions: [
+      {
+        title: "Why zero trust as the guiding model? (planned)",
+        description:
+          "Default-deny identity, encryption, and network isolation is the intended standard for the capstone build — every access decision is explicit and auditable rather than trusted by location.",
+      },
+      {
+        title: "Why a governance layer instead of one tool? (planned)",
+        description:
+          "Security spanning IAM, encryption, secrets, audit, and detection is meant to demonstrate that defense is systemic, applying to the infrastructure, delivery, application, and observability layers alike.",
+      },
+    ],
+    status: "planned",
+    featured: false,
+  },
+];
+
+export interface CloudDevOpsRoadmapStep {
+  slug: string;
+  stage: string;
+  stageLabel: string;
+  stageName: string;
+  stageDescription: string;
+}
+
+// Conceptual roadmap progression: Build → Automate → Deploy → Observe → Secure
+export const cloudDevOpsRoadmap: CloudDevOpsRoadmapStep[] = [
+  {
+    slug: "inforforge",
+    stage: "01",
+    stageLabel: "BUILD",
+    stageName: "Build",
+    stageDescription: "Production-style Infrastructure as Code on AWS with Terraform, Docker, and IAM.",
+  },
+  {
+    slug: "deployflow",
+    stage: "02",
+    stageLabel: "AUTOMATE",
+    stageName: "Automate",
+    stageDescription: "Automated CI/CD delivery pipeline to cloud infrastructure.",
+  },
+  {
+    slug: "cloudmind",
+    stage: "03",
+    stageLabel: "DEPLOY",
+    stageName: "Deploy",
+    stageDescription: "AI-powered cloud-native service architecture on managed AWS services.",
+  },
+  {
+    slug: "signalops",
+    stage: "04",
+    stageLabel: "OBSERVE",
+    stageName: "Observe",
+    stageDescription: "Observability, reliability, and automated incident response.",
+  },
+  {
+    slug: "cloudshield",
+    stage: "05",
+    stageLabel: "SECURE",
+    stageName: "Secure",
+    stageDescription: "Zero-trust AWS cloud security infrastructure and defense.",
   },
 ];
 
