@@ -86,7 +86,10 @@ export default function Home() {
       <RecentProjects />
 
       {/* 3.25. Cloud & DevOps Project Roadmap (Planned Builds) */}
-      <CloudRoadmap />
+      <CloudRoadmap
+        actionHref="/projects/cloud"
+        actionLabel="view roadmap"
+      />
 
       {/* 4. Tech Stack (<categories/> & Vector Pills) */}
       <TechStack />

@@ -22,6 +22,7 @@ export interface PortfolioPageContext {
   title: string;
   projectSlug?: string;
   selectedTech?: string;
+  projectCategory?: "software" | "cloud";
 }
 
 export interface ValidatedLink {
@@ -57,12 +58,33 @@ export function getPortfolioPageContext(
     };
   }
 
-  // 3. Projects Index
+  // 3. Projects Index (redirects to /projects/software; kept for legacy links)
   if (normalizedPath === "/projects") {
     return {
       pathname: "/projects",
       pageType: "projects",
       title: "Projects Index",
+      projectCategory: "software",
+    };
+  }
+
+  // 3a. Software Projects Category
+  if (normalizedPath === "/projects/software") {
+    return {
+      pathname: normalizedPath,
+      pageType: "projects",
+      title: "Software Projects",
+      projectCategory: "software",
+    };
+  }
+
+  // 3b. Cloud & DevOps Projects Category
+  if (normalizedPath === "/projects/cloud") {
+    return {
+      pathname: normalizedPath,
+      pageType: "projects",
+      title: "Cloud & DevOps Projects",
+      projectCategory: "cloud",
     };
   }
 
@@ -140,6 +162,13 @@ export function getSuggestedQuestions(context: PortfolioPageContext): string[] {
       ];
 
     case "projects":
+      if (context.projectCategory === "cloud") {
+        return [
+          "What are the planned Cloud/DevOps builds?",
+          "What is the Build → Automate → Deploy → Observe → Secure roadmap?",
+          "Which AWS services do the roadmap projects use?",
+        ];
+      }
       return [
         "Which projects should I explore first?",
         "Which projects are full-stack?",
@@ -196,7 +225,11 @@ export function validatePortfolioLink(href: string): { isValid: boolean; normali
   }
 
   // 1. Internal static routes
-  if (["/", "/work", "/projects", "/tech-stack", "/certifications"].includes(trimmed)) {
+  if (
+    ["/", "/work", "/projects", "/projects/software", "/projects/cloud", "/tech-stack", "/certifications"].includes(
+      trimmed
+    )
+  ) {
     return { isValid: true, normalizedHref: trimmed, isExternal: false };
   }
 
@@ -349,8 +382,13 @@ The visitor is viewing the Work & Experience page (/work). Highlight Gilbert's e
       activeFocusInstructions = `ACTIVE PAGE CONTEXT (CERTIFICATIONS):
 The visitor is on the Certifications page (/certifications). Answer questions regarding Gilbert's certifications based strictly on the provided certificate list.`;
     } else if (pageContext.pageType === "projects") {
-      activeFocusInstructions = `ACTIVE PAGE CONTEXT (PROJECTS OVERVIEW):
-The visitor is browsing the Projects Index (/projects). Highlight completed work (POS System, Scholaris, EcoWatch, PH Local Data API) and the five planned Cloud/DevOps roadmap builds (InfraForge, DeployFlow, CloudMind, SignalOps, CloudShield) — which are marked PLANNED and NOT completed, deployed, or production systems.`;
+      if (pageContext.projectCategory === "cloud") {
+        activeFocusInstructions = `ACTIVE PAGE CONTEXT (CLOUD & DEVOPS PROJECTS):
+The visitor is browsing the Cloud/DevOps roadmap page (/projects/cloud). Highlight the five planned Cloud/DevOps roadmap builds in sequence — InfraForge (Build), DeployFlow (Automate), CloudMind (Deploy), SignalOps (Observe), CloudShield (Secure) — which are PLANNED and not yet built, deployed, or operated. Explain how each build reuses the previous one's patterns.`;
+      } else {
+        activeFocusInstructions = `ACTIVE PAGE CONTEXT (SOFTWARE PROJECTS):
+The visitor is browsing the Software Projects page (/projects/software). Highlight the completed and in-progress software builds (POS System, Scholaris, EcoWatch, PH Local Data API) and mention the five planned Cloud/DevOps roadmap builds (InfraForge, DeployFlow, CloudMind, SignalOps, CloudShield) when relevant, noting they are PLANNED and not yet built.`;
+      }
     } else if (pageContext.pageType === "home") {
       activeFocusInstructions = `ACTIVE PAGE CONTEXT (HOMEPAGE):
 The visitor is on the homepage. Current in-progress build focus is: ${currentBuild.title} (${currentBuild.description}).`;
@@ -413,7 +451,7 @@ GUIDELINES FOR RESPONSES
    - When referencing or recommending projects, technologies, or sections, use standard markdown links with valid portfolio paths so visitors can navigate easily:
      * Project pages: [Project Title](/projects/<slug>) (e.g. [POS System](/projects/pos-system), [Scholaris](/projects/scholaris), [EcoWatch](/projects/ecowatch), [PH Local Data API](/projects/ph-local-data-api), [InfraForge](/projects/inforforge), [DeployFlow](/projects/deployflow), [CloudMind](/projects/cloudmind), [SignalOps](/projects/signalops), [CloudShield](/projects/cloudshield))
      * Filtered Tech: [Explore <Tech>](/tech-stack?tech=<canonical-tech-slug>) (e.g. [Explore Flutter](/tech-stack?tech=flutter), [Explore TypeScript](/tech-stack?tech=typescript))
-     * Sections: [View Projects](/projects), [View Tech Stack](/tech-stack), [View Certifications](/certifications), [View Work](/work)
+     * Sections: [View Software Projects](/projects/software), [View Cloud Roadmap](/projects/cloud), [View Tech Stack](/tech-stack), [View Certifications](/certifications), [View Work](/work)
      * Trusted external: [GitHub](https://github.com/YourGbDev)
    - Do NOT output random, unverified, or third-party web links.`;
 }

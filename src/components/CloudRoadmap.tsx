@@ -42,7 +42,12 @@ const STAGE_META: Record<
   },
 };
 
-export function CloudRoadmap() {
+interface CloudRoadmapProps {
+  actionHref?: string;
+  actionLabel?: string;
+}
+
+export function CloudRoadmap({ actionHref, actionLabel }: CloudRoadmapProps) {
   const shouldReduceMotion = useReducedMotion();
   const { playHover, playClick } = useUISound();
 
@@ -67,6 +72,8 @@ export function CloudRoadmap() {
       <SectionHeader
         label="CLOUD-DEVOPS-ROADMAP"
         description="Five planned Cloud/DevOps learning builds, sequenced Build → Automate → Deploy → Observe → Secure. These are roadmap projects, not completed deployments."
+        actionHref={actionHref}
+        actionLabel={actionLabel}
         className="mb-5 pb-2 border-b border-border-hairline/40"
       />
 

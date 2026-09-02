@@ -7,13 +7,15 @@ import { fullProjects, cloudDevOpsRoadmap } from "@/lib/data";
 import { TechIcon } from "@/components/TechIcon";
 import { ProjectStatusBadge } from "@/components/ProjectStatusBadge";
 import { ProjectMedia } from "@/components/ProjectMedia";
-import { CloudRoadmap } from "@/components/CloudRoadmap";
 import { useUISound } from "@/context/SoundContext";
 
 export function ProjectsPageClient() {
   const { playHover, playClick } = useUISound();
 
   const cloudProjectSlugs = new Set(cloudDevOpsRoadmap.map((step) => step.slug));
+  const softwareProjects = fullProjects.filter(
+    (project) => !cloudProjectSlugs.has(project.slug)
+  );
 
   return (
     <div className="w-full select-none">
@@ -32,27 +34,21 @@ export function ProjectsPageClient() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink tracking-tight">
-              Projects
+              Software Projects
             </h1>
             <p className="font-mono text-xs text-muted-foreground mt-1">
-              {"// Selected software engineering, full-stack, and mobile applications"}
+              {"// Software engineering, full-stack, and mobile applications"}
             </p>
           </div>
           <span className="font-mono text-xs text-muted-foreground bg-muted-subtle px-2.5 py-1 rounded border border-border-hairline">
-            {fullProjects.length} builds
+            {softwareProjects.length} builds
           </span>
         </div>
       </div>
 
-      {/* Cloud & DevOps Project Roadmap (Planned Builds) */}
-      <div className="mb-14">
-        <CloudRoadmap />
-      </div>
-
       {/* 2-Column Responsive CAD Project Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {fullProjects
-          .filter((project) => !cloudProjectSlugs.has(project.slug))
+        {softwareProjects
           .map((project) => (
             <article
               key={project.slug}
